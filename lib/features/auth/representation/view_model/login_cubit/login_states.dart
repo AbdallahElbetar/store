@@ -4,9 +4,9 @@ class LoginInitialState extends LoginStates {
   LoginInitialState();
 }
 
-class PasswordVisibilityChangedState extends LoginStates {
+class ChangePasswordVisibilityState extends LoginStates {
   bool isVisible;
-  PasswordVisibilityChangedState({required this.isVisible});
+  ChangePasswordVisibilityState({required this.isVisible});
 }
 
 class LoadingLoginState extends LoginStates {}

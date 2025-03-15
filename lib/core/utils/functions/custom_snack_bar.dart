@@ -28,5 +28,6 @@ void showCustomSnackBar({
   AnimatedSnackBar.material(
     message,
     type: animatedType,
+    mobileSnackBarPosition: MobileSnackBarPosition.bottom,
   ).show(context);
 }

@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/core/theaming/colors.dart';
 
 import 'package:store/core/theaming/styles.dart';
+import 'package:store/core/utils/functions/custom_snack_bar.dart';
 import 'package:store/features/auth/representation/view/widgets/login_button.dart';
 import 'package:store/features/auth/representation/view_model/login_cubit/login_cubit.dart';
 import 'package:store/features/auth/representation/view_model/login_cubit/login_states.dart';
 
+import '../../../../../core/widgets/custom_circular_indicator.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class LoginView extends StatefulWidget {
@@ -36,11 +38,13 @@ class _LoginViewState extends State<LoginView> {
       bloc: bloc,
       listener: (context, state) {
         if (state is SuccessLoginState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Success Logged in ")));
+          showCustomSnackBar(
+              message: "Success Logged In",
+              context: context,
+              type: SnackBarType.success);
         } else if (state is FailureLoginState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text("Failure Logge in ")));
+          showCustomSnackBar(
+              message: state.error, context: context, type: SnackBarType.error);
         }
       },
       builder: (context, state) {
@@ -110,9 +114,7 @@ class _LoginViewState extends State<LoginView> {
                       }
                     },
                     centerWidget: state is LoadingLoginState
-                        ? CircularProgressIndicator(
-                            color: AppColors.myWhite,
-                          )
+                        ? CustomCircularIndicator()
                         : Text(""),
                     text: "Sign In",
                   ),

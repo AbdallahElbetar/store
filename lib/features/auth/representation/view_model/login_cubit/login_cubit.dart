@@ -9,6 +9,7 @@ class LoginCubit extends Cubit<LoginStates> {
     this._loginRepo,
   ) : super(LoginInitialState());
   bool isVisible = true;
+
   void changePasswordVisibility() {
     isVisible = !isVisible;
     emit(ChangePasswordVisibilityState(isVisible: isVisible));
@@ -28,7 +29,11 @@ class LoginCubit extends Cubit<LoginStates> {
       },
       (successLogin) {
         if (successLogin["status"] == false) {
-          emit(FailureLoginState(error: successLogin["message"]));
+          emit(
+            FailureLoginState(
+              error: successLogin["message"],
+            ),
+          );
         } else {
           emit(SuccessLoginState());
         }

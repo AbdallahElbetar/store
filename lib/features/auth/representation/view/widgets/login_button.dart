@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+import 'package:store/core/theaming/styles.dart';
+import 'package:store/core/widgets/custom_button.dart';
+
+class LoginButton extends StatelessWidget {
+  const LoginButton(
+      {super.key,
+      required this.onTap,
+      required this.centerWidget,
+      required this.text});
+
+  final void Function() onTap;
+  final Widget centerWidget;
+  final String? text;
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(
+        widget: centerWidget is Text
+            ? Text(
+                text!,
+                style: Styles.textStyleWhite14,
+              )
+            : centerWidget,
+        onTap: onTap);
+  }
+}

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:store/features/auth/representation/view_model/login_cubit/login_states.dart';
+import 'login_states.dart';
 
 import '../../../data/repos/login_repo.dart';
 

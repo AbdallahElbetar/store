@@ -1,10 +1,13 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:store/core/constants.dart';
+
+import '../constants.dart';
+import '../di/setup_services_locator.dart';
 
 class ApiServices {
-  final Dio dio;
+  // final Dio dio;
+  var dio = getIt.get<Dio>();
   ApiServices({
     required this.dio,
   });

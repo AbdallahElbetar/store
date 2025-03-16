@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:store/core/theaming/styles.dart';
-import 'package:store/core/widgets/custom_button.dart';
+import '../../../../../core/theaming/styles.dart';
+import '../../../../../core/widgets/custom_button.dart';
 
 class LoginButton extends StatelessWidget {
   const LoginButton(

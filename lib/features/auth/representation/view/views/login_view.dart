@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store/core/theaming/colors.dart';
+import '../../../../../core/theaming/colors.dart';
 
-import 'package:store/core/theaming/styles.dart';
-import 'package:store/core/utils/functions/custom_snack_bar.dart';
-import 'package:store/features/auth/representation/view/widgets/login_button.dart';
-import 'package:store/features/auth/representation/view_model/login_cubit/login_cubit.dart';
-import 'package:store/features/auth/representation/view_model/login_cubit/login_states.dart';
+import '../../../../../core/theaming/styles.dart';
+import '../../../../../core/utils/functions/custom_snack_bar.dart';
+import '../widgets/login_button.dart';
+import '../../view_model/login_cubit/login_cubit.dart';
+import '../../view_model/login_cubit/login_states.dart';
 
 import '../../../../../core/widgets/custom_circular_indicator.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -54,8 +54,6 @@ class _LoginViewState extends State<LoginView> {
             body: Form(
               key: formKey,
               child: ListView(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 15,
@@ -81,24 +79,21 @@ class _LoginViewState extends State<LoginView> {
                     suffixIcon: null,
                   ),
                   CustomTextFormField(
-                    hintText: 'Enter your password',
-                    labelText: 'Password',
-                    isPassword: bloc.isVisible,
-                    controller: passwordController,
-                    suffixIcon: state is ChangePasswordVisibilityState
-                        ? IconButton(
-                            onPressed: () {
-                              bloc.changePasswordVisibility();
-                            },
-                            icon: Icon(
-                              bloc.isVisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: AppColors.myGrey,
-                            ),
-                          )
-                        : null,
-                  ),
+                      hintText: 'Enter your password',
+                      labelText: 'Password',
+                      isPassword: bloc.isVisible,
+                      controller: passwordController,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          bloc.changePasswordVisibility();
+                        },
+                        icon: Icon(
+                          bloc.isVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: AppColors.myGrey,
+                        ),
+                      )),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 15,
                   ),

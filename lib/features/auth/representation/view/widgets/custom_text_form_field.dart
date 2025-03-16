@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:store/core/theaming/colors.dart';
+import '../../../../../core/theaming/colors.dart';
 
 import '../../../../../core/theaming/styles.dart';
 

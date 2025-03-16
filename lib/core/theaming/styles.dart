@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:store/core/theaming/colors.dart';
+
+import 'colors.dart';
 
 abstract class Styles {
   static final textStyleBlack32 = TextStyle(

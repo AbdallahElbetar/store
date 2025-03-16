@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:store/core/errors/failures.dart';
+import '../../../../core/errors/failures.dart';
 
 abstract class LoginRepo {
   Future<Either<Failure, Map<String, dynamic>>> loginUser(

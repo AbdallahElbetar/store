@@ -34,113 +34,117 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     var bloc = BlocProvider.of<LoginCubit>(context);
-    return BlocConsumer<LoginCubit, LoginStates>(
-      bloc: bloc,
-      listener: (context, state) {
-        if (state is SuccessLoginState) {
-          showCustomSnackBar(
-              message: "Success Logged In",
-              context: context,
-              type: SnackBarType.success);
-        } else if (state is FailureLoginState) {
-          showCustomSnackBar(
-              message: state.error, context: context, type: SnackBarType.error);
-        }
-      },
-      builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Scaffold(
-            body: Form(
-              key: formKey,
-              child: ListView(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 15,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "Login to your account",
-                        style: Styles.textStyleBlack32,
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "It’s great to see you again.",
-                    style: Styles.textStyleGrey16,
-                  ),
-
-                  CustomTextFormField(
-                    hintText: 'Enter your email address',
-                    labelText: 'User Name',
-                    isPassword: false,
-                    controller: userNameController,
-                    suffixIcon: null,
-                  ),
-                  CustomTextFormField(
-                      hintText: 'Enter your password',
-                      labelText: 'Password',
-                      isPassword: bloc.isVisible,
-                      controller: passwordController,
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          bloc.changePasswordVisibility();
-                        },
-                        icon: Icon(
-                          bloc.isVisible
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: AppColors.myGrey,
+    return Scaffold(
+      body: BlocConsumer<LoginCubit, LoginStates>(
+        bloc: bloc,
+        listener: (context, state) {
+          if (state is SuccessLoginState) {
+            showCustomSnackBar(
+                message: "Success Logged In",
+                context: context,
+                type: SnackBarType.success);
+          } else if (state is FailureLoginState) {
+            showCustomSnackBar(
+                message: state.error,
+                context: context,
+                type: SnackBarType.error);
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Scaffold(
+              body: Form(
+                key: formKey,
+                child: ListView(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 15,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Login to your account",
+                          style: Styles.textStyleBlack32,
                         ),
-                      )),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 15,
-                  ),
+                      ],
+                    ),
+                    Text(
+                      "It’s great to see you again.",
+                      style: Styles.textStyleGrey16,
+                    ),
 
-                  /// login Button
-                  LoginButton(
-                    onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        await bloc.loginUser(
-                          email: userNameController.text,
-                          password: passwordController.text,
-                        );
-                      }
-                    },
-                    centerWidget: state is LoadingLoginState
-                        ? CustomCircularIndicator()
-                        : Text(""),
-                    text: "Sign In",
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.35,
-                  ),
+                    CustomTextFormField(
+                      hintText: 'Enter your email address',
+                      labelText: 'User Name',
+                      isPassword: false,
+                      controller: userNameController,
+                      suffixIcon: null,
+                    ),
+                    CustomTextFormField(
+                        hintText: 'Enter your password',
+                        labelText: 'Password',
+                        isPassword: bloc.isVisible,
+                        controller: passwordController,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            bloc.changePasswordVisibility();
+                          },
+                          icon: Icon(
+                            bloc.isVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: AppColors.myGrey,
+                          ),
+                        )),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 15,
+                    ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: Styles.textStyleGrey16,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Join",
-                          style: Styles.textStyleBlack16.copyWith(
-                            decoration: TextDecoration.underline,
+                    /// login Button
+                    LoginButton(
+                      onTap: () async {
+                        if (formKey.currentState!.validate()) {
+                          await bloc.loginUser(
+                            email: userNameController.text,
+                            password: passwordController.text,
+                          );
+                        }
+                      },
+                      centerWidget: state is LoadingLoginState
+                          ? CustomCircularIndicator()
+                          : Text(""),
+                      text: "Sign In",
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.35,
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: Styles.textStyleGrey16,
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Join",
+                            style: Styles.textStyleBlack16.copyWith(
+                              decoration: TextDecoration.underline,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

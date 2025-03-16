@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:store/core/routing/app_router.dart';
 import 'core/di/setup_services_locator.dart';
 import 'features/auth/data/repos/login_repo.dart';
 
-import 'features/auth/representation/view/views/login_view.dart';
 import 'features/auth/representation/view_model/login_cubit/login_cubit.dart';
 
 void main() {
@@ -31,11 +31,9 @@ class Store extends StatelessWidget {
         designSize: const Size(390, 844),
         minTextAdapt: true,
         splitScreenMode: true,
-        child: MaterialApp(
+        child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            body: LoginView(),
-          ),
+          routerConfig: AppRouter.router,
         ),
       ),
     );

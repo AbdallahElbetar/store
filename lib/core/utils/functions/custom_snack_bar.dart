@@ -24,9 +24,11 @@ void showCustomSnackBar({
       animatedType = AnimatedSnackBarType.warning;
       break;
   }
-
+  String finalMessage = animatedType == AnimatedSnackBarType.success
+      ? "$message go to Login"
+      : message;
   AnimatedSnackBar.material(
-    message,
+    finalMessage,
     type: animatedType,
     mobileSnackBarPosition: MobileSnackBarPosition.bottom,
   ).show(context);

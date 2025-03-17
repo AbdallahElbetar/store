@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theaming/styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
 
-class LoginButton extends StatelessWidget {
-  const LoginButton(
+class AuthButton extends StatelessWidget {
+  const AuthButton(
       {super.key,
       required this.onTap,
       required this.centerWidget,

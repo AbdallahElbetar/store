@@ -1,53 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:store/core/routing/app_router.dart';
+import 'package:store/features/auth/representation/view_model/register_cubit/register_cubit.dart';
+import 'package:store/features/auth/representation/view_model/register_cubit/register_states.dart';
 import '../../../../../core/theaming/colors.dart';
 
 import '../../../../../core/theaming/styles.dart';
 import '../../../../../core/utils/functions/custom_snack_bar.dart';
 import '../widgets/auth_button.dart';
-import '../../view_model/login_cubit/login_cubit.dart';
-import '../../view_model/login_cubit/login_states.dart';
-
 import '../../../../../core/widgets/custom_circular_indicator.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class RegsiterView extends StatefulWidget {
+  const RegsiterView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<RegsiterView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
-  TextEditingController userNameController = TextEditingController();
+class _LoginViewState extends State<RegsiterView> {
+  TextEditingController fullNameController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
+  TextEditingController phoneNumberController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void dispose() {
     super.dispose();
-    userNameController.dispose();
+    fullNameController.dispose();
     passwordController.dispose();
+    emailController.dispose();
+    phoneNumberController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    var bloc = BlocProvider.of<LoginCubit>(context);
+    var bloc = BlocProvider.of<RegisterCubit>(context);
     return Scaffold(
-      body: BlocConsumer<LoginCubit, LoginStates>(
+      body: BlocConsumer<RegisterCubit, RegisterStates>(
         bloc: bloc,
         listener: (context, state) {
-          if (state is SuccessLoginState) {
+          if (state is SuccessRegisterState) {
             showCustomSnackBar(
-                message: "Success Logged In",
+                message: state.successMessage,
                 context: context,
                 type: SnackBarType.success);
-          } else if (state is FailureLoginState) {
+          } else if (state is FailureRegisterState) {
             showCustomSnackBar(
-                message: state.error,
+                message: state.errMessage,
                 context: context,
                 type: SnackBarType.error);
           }
@@ -66,34 +69,49 @@ class _LoginViewState extends State<LoginView> {
                     Row(
                       children: [
                         Text(
-                          "Login to your account",
+                          "Create an account",
                           style: Styles.textStyleBlack32,
                         ),
                       ],
                     ),
                     Text(
-                      "It’s great to see you again.",
+                      "Let’s create your account.",
                       style: Styles.textStyleGrey16,
                     ),
 
                     CustomTextFormField(
-                      hintText: 'Enter your email address',
-                      labelText: 'User Name',
+                      hintText: 'Enter your full name',
+                      labelText: 'Full Name',
                       isPassword: false,
-                      controller: userNameController,
+                      controller: fullNameController,
                       suffixIcon: null,
                     ),
                     CustomTextFormField(
+                      hintText: 'Enter your email address',
+                      labelText: 'User Name',
+                      isPassword: false,
+                      controller: emailController,
+                      suffixIcon: null,
+                    ),
+                    CustomTextFormField(
+                      hintText: 'Enter your Phone number',
+                      labelText: 'Phone Number',
+                      isPassword: false,
+                      controller: phoneNumberController,
+                      suffixIcon: null,
+                    ),
+
+                    CustomTextFormField(
                         hintText: 'Enter your password',
                         labelText: 'Password',
-                        isPassword: bloc.isVisible,
+                        isPassword: bloc.isPasswordVisible,
                         controller: passwordController,
                         suffixIcon: IconButton(
                           onPressed: () {
                             bloc.changePasswordVisibility();
                           },
                           icon: Icon(
-                            bloc.isVisible
+                            bloc.isPasswordVisible
                                 ? Icons.visibility_off
                                 : Icons.visibility,
                             color: AppColors.myGrey,
@@ -103,38 +121,40 @@ class _LoginViewState extends State<LoginView> {
                       height: MediaQuery.of(context).size.height / 15,
                     ),
 
-                    /// login Button
+                    /// Register Button
                     AuthButton(
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          await bloc.loginUser(
-                            email: userNameController.text,
+                          await bloc.registerUser(
+                            fullName: fullNameController.text,
+                            email: emailController.text,
+                            phoneNumber: phoneNumberController.text,
                             password: passwordController.text,
                           );
                         }
                       },
-                      centerWidget: state is LoadingLoginState
+                      centerWidget: state is LoadingRegisterState
                           ? CustomCircularIndicator()
                           : Text(""),
-                      text: "Sign In",
+                      text: "Create Account",
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.35,
+                      height: MediaQuery.of(context).size.height * 0.15,
                     ),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?",
+                          "Already have an account?",
                           style: Styles.textStyleGrey16,
                         ),
                         TextButton(
                           onPressed: () {
-                            context.push(AppRouter.kregisterView);
+                            context.pop();
                           },
                           child: Text(
-                            "Join",
+                            " Log In",
                             style: Styles.textStyleBlack16.copyWith(
                               decoration: TextDecoration.underline,
                             ),

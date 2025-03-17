@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:store/core/routing/app_router.dart';
+import 'package:store/features/auth/data/repos/register_repo.dart';
+
+import 'package:store/features/auth/representation/view_model/register_cubit/register_cubit.dart';
 import 'core/di/setup_services_locator.dart';
 import 'features/auth/data/repos/login_repo.dart';
 
@@ -18,6 +21,7 @@ class Store extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // LoginRepo loginRepo = LoginRepoImpl();
+    var registerRepo = getIt.get<RegisterRepo>();
     var loginRepo = getIt.get<LoginRepo>();
     return MultiBlocProvider(
       providers: [
@@ -25,7 +29,8 @@ class Store extends StatelessWidget {
           create: (context) {
             return LoginCubit(loginRepo);
           },
-        )
+        ),
+        BlocProvider(create: (context) => RegisterCubit(registerRepo)),
       ],
       child: ScreenUtilInit(
         designSize: const Size(390, 844),

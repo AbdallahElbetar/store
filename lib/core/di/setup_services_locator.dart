@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:store/features/auth/data/repos/register_repo.dart';
-import 'package:store/features/auth/data/repos/register_repo_impl.dart';
+import '../../features/auth/data/repos/register_repo.dart';
+import '../../features/auth/data/repos/register_repo_impl.dart';
 
 import '../../features/auth/data/repos/login_repo.dart';
 import '../../features/auth/data/repos/login_repo_impl.dart';

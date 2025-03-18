@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import 'package:store/core/errors/failures.dart';
-import 'package:store/core/netwoking/api_services.dart';
-import 'package:store/features/auth/data/repos/register_repo.dart';
+import '../../../../core/errors/failures.dart';
+import '../../../../core/netwoking/api_services.dart';
+import 'register_repo.dart';
 
 class RegisterRepoImpl implements RegisterRepo {
   final ApiServices apiServices;

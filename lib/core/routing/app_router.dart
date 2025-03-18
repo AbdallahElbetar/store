@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
-import 'package:store/features/auth/representation/view/views/login_view.dart';
-import 'package:store/features/auth/representation/view/views/register_view.dart';
+
+import '../../features/auth/presentation/view/views/login_view.dart';
+import '../../features/auth/presentation/view/views/register_view.dart';
 
 class AppRouter {
   static final String kregisterView = '/registerView';

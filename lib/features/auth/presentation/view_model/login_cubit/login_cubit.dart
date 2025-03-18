@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'login_states.dart';
-
 import '../../../data/repos/login_repo.dart';
+import 'login_states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
   LoginCubit(

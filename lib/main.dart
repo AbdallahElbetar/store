@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/core/routing/app_router.dart';
-import 'package:store/features/auth/data/repos/register_repo.dart';
+import 'core/routing/app_router.dart';
+import 'features/auth/data/repos/register_repo.dart';
 
-import 'package:store/features/auth/representation/view_model/register_cubit/register_cubit.dart';
+import 'features/auth/presentation/view_model/register_cubit/register_cubit.dart';
 import 'core/di/setup_services_locator.dart';
 import 'features/auth/data/repos/login_repo.dart';
 
-import 'features/auth/representation/view_model/login_cubit/login_cubit.dart';
+import 'features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

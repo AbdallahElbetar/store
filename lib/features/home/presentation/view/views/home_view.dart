@@ -1,61 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:store/core/theaming/colors.dart';
-import 'package:store/core/theaming/styles.dart';
 
+import '../widgets/all_categories.dart';
 import '../widgets/custom_app_bar.dart';
+import '../widgets/custom_search_bar.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(children: [
-        CustomAppBar(),
-      ]),
-    );
-  }
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({super.key});
-
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 5,
-          child: TextField(
-            decoration: InputDecoration(
-              prefixIcon: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.search),
-              ),
-              filled: true,
-              hintText: "Search for clothes...",
-              hintStyle: Styles.textStyleGrey16,
-              fillColor: Colors.grey.shade200,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Column(
+          children: [
+            CustomAppBar(),
+            CustomSearchBar(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 60,
             ),
-          ),
+            AllCategories(),
+          ],
         ),
-        Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppColors.myPrimaryBlue,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                Icons.tune,
-                color: Colors.white,
-              ),
-            )),
-      ],
+      ),
     );
   }
 }

@@ -131,7 +131,7 @@ class _LoginViewState extends State<LoginView> {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.push(AppRouter.kregisterView);
+                            // context.push(AppRouter.kregisterView);
                           },
                           child: Text(
                             "Join",

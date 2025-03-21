@@ -19,4 +19,6 @@ abstract class Styles {
       fontFamily: GoogleFonts.readexPro().fontFamily);
   static final textStyleWhite14 = TextStyle(
       fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.myWhite);
+  static final textStyleWhite16 = TextStyle(
+      fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.myWhite);
 }

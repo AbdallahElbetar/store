@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import '../constants.dart';
 import '../di/setup_services_locator.dart';
+import '../utils/storage_helper.dart';
 
 class ApiServices {
   // final Dio dio;
@@ -11,19 +12,23 @@ class ApiServices {
   ApiServices({
     required this.dio,
   });
-  Future<Map<String, dynamic>> getRequest(
-      {required String endPoint, required String token}) async {
+  Future<dynamic> getRequest(
+      {required String endPoint, required String? token}) async {
     try {
+      final headers = {
+        "lang": "en",
+        "Content-Type": "application/json",
+      };
+      if (token != null) {
+        headers["Authorization"] = token;
+      }
+
       Response response = await dio.get(
         "$baseUrl$endPoint",
-        options: Options(headers: {
-          "lang": "en",
-          "Content-Type": "application/json",
-          "Authorization": token,
-        }),
+        options: Options(headers: headers),
       );
 
-      return response.data;
+      return response;
     } on DioException catch (e) {
       return {"ErrorFromJson": e.error};
     } catch (e) {
@@ -52,7 +57,7 @@ class ApiServices {
           headers: headers,
         ),
       );
-      return response.data;
+      return response.data as Map<String, dynamic>;
     } on DioException catch (e) {
       log("APi Error ${e.message}");
 
@@ -69,5 +74,11 @@ class ApiServices {
       // Handle any other unexpected errors
       throw Exception("An unexpected error occurred: $e");
     }
+  }
+
+  // return Token from storage helper
+
+  Future<String?> getToken() async {
+    return await getIt.get<StorageHelper>().getToken();
   }
 }

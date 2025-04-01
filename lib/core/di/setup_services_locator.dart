@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import '../../features/auth/data/repos/register_repo.dart';
-import '../../features/auth/data/repos/register_repo_impl.dart';
 
 import '../../features/auth/data/repos/login_repo.dart';
 import '../../features/auth/data/repos/login_repo_impl.dart';
+import '../../features/auth/data/repos/register_repo.dart';
+import '../../features/auth/data/repos/register_repo_impl.dart';
 import '../netwoking/api_services.dart';
+import '../utils/storage_helper.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,4 +23,5 @@ void setupServiceLocator() {
 
   getIt.registerSingleton<RegisterRepo>(
       RegisterRepoImpl(apiServices: getIt.get<ApiServices>()));
+  getIt.registerSingleton<StorageHelper>(StorageHelper());
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../view_model/register_cubit/register_cubit.dart';
-import '../../view_model/register_cubit/register_states.dart';
-import '../../../../../core/theaming/colors.dart';
 
+import '../../../../../core/theaming/colors.dart';
 import '../../../../../core/theaming/styles.dart';
 import '../../../../../core/utils/functions/custom_snack_bar.dart';
-import '../widgets/auth_button.dart';
 import '../../../../../core/widgets/custom_circular_indicator.dart';
+import '../../view_model/register_cubit/register_cubit.dart';
+import '../../view_model/register_cubit/register_states.dart';
+import '../widgets/auth_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class RegsiterView extends StatefulWidget {
@@ -155,7 +155,8 @@ class _LoginViewState extends State<RegsiterView> {
                           },
                           child: Text(
                             " Log In",
-                            style: Styles.textStyleBlack16.copyWith(
+                            style:
+                                Styles.textStyleBlack16ReadexProFont.copyWith(
                               decoration: TextDecoration.underline,
                             ),
                           ),

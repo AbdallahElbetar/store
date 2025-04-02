@@ -11,7 +11,10 @@ class ChangePasswordVisibilityState extends LoginStates {
 
 class LoadingLoginState extends LoginStates {}
 
-class SuccessLoginState extends LoginStates {}
+class SuccessLoginState extends LoginStates {
+  final String? token;
+  SuccessLoginState({required this.token});
+}
 
 class FailureLoginState extends LoginStates {
   final String error;

@@ -33,8 +33,10 @@ class LoginCubit extends Cubit<LoginStates> {
               error: successLogin["message"],
             ),
           );
-        } else {
-          emit(SuccessLoginState());
+        } else if (successLogin["status"] == true) {
+          emit(SuccessLoginState(
+            token: successLogin["data"]["token"],
+          ));
         }
       },
     );

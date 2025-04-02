@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/theaming/colors.dart';
 
+import '../../../../../core/theaming/colors.dart';
 import '../../../../../core/theaming/styles.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -25,7 +25,7 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Text(
           labelText,
-          style: Styles.textStyleBlack16,
+          style: Styles.textStyleBlack16ReadexProFont,
         ),
         TextFormField(
           validator: (value) {

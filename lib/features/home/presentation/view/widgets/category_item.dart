@@ -35,7 +35,7 @@ class CategoryItem extends StatelessWidget {
               categoryName,
               style: isSelected
                   ? Styles.textStyleWhite16
-                  : Styles.textStyleBlack16,
+                  : Styles.textStyleBlack16ReadexProFont,
             ),
           ),
         ),

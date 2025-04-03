@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:store/features/home/presentation/view/widgets/category_item.dart';
 
 import '../../../../../core/constants.dart';
+import '../../view_model/get_home_product.dart/get_home_product_cubit.dart';
+import 'category_item.dart';
 
 class AllCategories extends StatefulWidget {
   const AllCategories({super.key});
@@ -29,7 +31,12 @@ class _AllCategoriesState extends State<AllCategories> {
             onTap: () {
               setState(() {
                 selectIndex = index;
+                categoriesName[index];
               });
+              BlocProvider.of<GetHomeProductCubit>(context).getHomeProduct(
+                  categoryName: categoriesName[index] == "All"
+                      ? null
+                      : categoriesName[index]);
             },
           );
         },

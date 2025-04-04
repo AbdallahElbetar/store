@@ -9,8 +9,10 @@ class ProductItem extends StatefulWidget {
   const ProductItem({
     super.key,
     required this.productModel,
+    required this.onTap,
   });
   final ProductModel productModel;
+  final Function() onTap;
 
   @override
   State<ProductItem> createState() => _ProductItemState();
@@ -20,58 +22,61 @@ class _ProductItemState extends State<ProductItem> {
   bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-            child: CachedNetworkImage(
-              imageUrl: widget.productModel.image,
-              errorWidget: (context, url, error) {
-                return Image.asset("assets/images/errorImage.png",
-                    height: 80.h, fit: BoxFit.cover);
-              },
-              height: 120.h,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Text(
-            widget.productModel.name,
-            style: Styles.textStyleBlack16DmSansFont.copyWith(
-              fontSize: 14.sp,
-            ),
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                r"$  " + widget.productModel.price.toString(),
-                style: Styles.textStyleGrey16,
-              ),
-              IconButton(
-                icon: isFavorite
-                    ? const Icon(
-                        Icons.favorite,
-                        color: Colors.red,
-                      )
-                    : const Icon(
-                        Icons.favorite_border,
-                      ),
-                onPressed: () {
-                  setState(() {
-                    if (isFavorite) {
-                      isFavorite = false;
-                    } else {
-                      isFavorite = true;
-                    }
-                  });
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: CachedNetworkImage(
+                imageUrl: widget.productModel.image,
+                errorWidget: (context, url, error) {
+                  return Image.asset("assets/images/errorImage.png",
+                      height: 80.h, fit: BoxFit.cover);
                 },
-              )
-            ],
-          )
-        ],
+                height: 120.h,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Text(
+              widget.productModel.name,
+              style: Styles.textStyleBlack26DmSansFont.copyWith(
+                fontSize: 14.sp,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  r"$  " + widget.productModel.price.toString(),
+                  style: Styles.textStyleGrey16,
+                ),
+                IconButton(
+                  icon: isFavorite
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )
+                      : const Icon(
+                          Icons.favorite_border,
+                        ),
+                  onPressed: () {
+                    setState(() {
+                      if (isFavorite) {
+                        isFavorite = false;
+                      } else {
+                        isFavorite = true;
+                      }
+                    });
+                  },
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
